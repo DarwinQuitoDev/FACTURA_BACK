@@ -12,11 +12,11 @@
   },
   "name": "facturav2_back",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-  "start": "node app.js",
-  "dev": "nodemon"
-}, 
+    "start": "node src/app.js",
+    "dev": "nodemon"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

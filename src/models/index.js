@@ -1,6 +1,7 @@
 const Bodega = require('./Bodega');
 const CategoriaProducto = require('./CategoriaProducto');
 const CertificadoDigital = require('./CertificadoDigital');
+const CodigoBarras = require('./CodigoBarras');
 const CodigoICE = require('./CodigoICE');
 const Compra = require('./Compra');
 const DetalleCompra = require('./DetalleCompra');
@@ -63,10 +64,23 @@ Producto.belongsTo(UnidadMedida, { foreignKey: 'unidad_medida_id' });
 Producto.belongsTo(Impuesto, { foreignKey: 'impuesto_id' });
 Producto.belongsTo(CodigoICE, { foreignKey: 'codigo_ice_id' });
 Producto.hasMany(PrecioProducto, { foreignKey: 'producto_id', as: 'precios' });
+Producto.hasMany(CodigoBarras, { foreignKey: 'producto_id', as: 'codigos_barras' });
+
+// CodigoBarras relationships
+CodigoBarras.belongsTo(Producto, { foreignKey: 'producto_id' });
 
 // Empresa relationships
 Empresa.hasMany(CertificadoDigital, { foreignKey: 'empresa_id' });
 Empresa.hasMany(Establecimiento, { foreignKey: 'empresa_id' });
+
+// Establecimiento relationships
+Establecimiento.belongsTo(Empresa, { foreignKey: 'empresa_id' });
+Establecimiento.hasMany(NumeracionSRI, { foreignKey: 'establecimiento_id' });
+Establecimiento.hasMany(PuntoEmision, { foreignKey: 'establecimiento_id' });
+
+// PuntoEmision relationships
+PuntoEmision.belongsTo(Establecimiento, { foreignKey: 'establecimiento_id' });
+PuntoEmision.hasMany(Venta, { foreignKey: 'punto_emision_id' });
 
 // Venta relationships
 Venta.belongsTo(Persona, { foreignKey: 'cliente_id', as: 'cliente' });
@@ -105,6 +119,10 @@ MovimientoInventario.belongsTo(Usuario, { foreignKey: 'usuario_id' });
 NumeracionSRI.belongsTo(Establecimiento, { foreignKey: 'establecimiento_id' });
 NumeracionSRI.belongsTo(TipoComprobante, { foreignKey: 'tipo_comprobante_id' });
 
+// TipoComprobante relationships
+TipoComprobante.hasMany(NumeracionSRI, { foreignKey: 'tipo_comprobante_id' });
+TipoComprobante.hasMany(Venta, { foreignKey: 'tipo_comprobante_id' });
+
 // PagoVenta relationships
 PagoVenta.belongsTo(Venta, { foreignKey: 'venta_id' });
 PagoVenta.belongsTo(FormaPago, { foreignKey: 'forma_pago_id' });
@@ -122,6 +140,17 @@ RetencionCompra.belongsTo(Compra, { foreignKey: 'compra_id' });
 // Proveedor relationships
 Proveedor.belongsTo(Persona, { foreignKey: 'persona_id' });
 
+// Bodega relationships
+Bodega.belongsTo(Persona, { foreignKey: 'responsable_id', as: 'responsable' });
+Bodega.hasMany(MovimientoInventario, { foreignKey: 'bodega_id' });
+Bodega.hasMany(Compra, { foreignKey: 'bodega_id' });
+
+// PrecioProducto relationships
+PrecioProducto.belongsTo(Producto, { foreignKey: 'producto_id' });
+
+// DocumentoElectronico relationships
+DocumentoElectronico.belongsTo(Venta, { foreignKey: 'venta_id' });
+
 // UsuarioRol relationships
 UsuarioRol.belongsTo(Usuario, { 
     foreignKey: 'asignado_por',
@@ -132,6 +161,7 @@ module.exports = {
     Bodega,
     CategoriaProducto,
     CertificadoDigital,
+    CodigoBarras,
     CodigoICE,
     Compra,
     DetalleCompra,
