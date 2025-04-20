@@ -3,9 +3,7 @@ const cors = require('cors');
 const db = require('./config/db');
 
 // Importar rutas
-const authRoutes = require('./routes/auth.routes');
-const productosRoutes = require('./routes/productos.routers');
-// Importa otras rutas según necesites
+const usuariosRoutes = require('./routes/usuarios.routes');
 
 const app = express();
 
@@ -20,9 +18,7 @@ app.use((req, res, next) => {
 });
 
 // Rutas
-app.use('/api/auth', authRoutes);
-app.use('/api/productos', productosRoutes);
-// Usa otras rutas según necesites
+app.use('/api/usuarios', usuariosRoutes)
 
 // Manejador de errores
 app.use((err, req, res, next) => {

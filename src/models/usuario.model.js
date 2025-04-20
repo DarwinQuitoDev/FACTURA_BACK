@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Usuario = sequelize.define('Usuario', {
+class Usuario extends Model {}
+
+Usuario.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -55,8 +57,25 @@ const Usuario = sequelize.define('Usuario', {
         type: DataTypes.DATE
     }
 }, {
+    sequelize,
+    modelName: 'Usuario',
     tableName: 'usuarios',
     timestamps: false
 });
+
+Usuario.associate = (models) => {
+    //INFROMACION DEL USUARIO
+    Usuario.belongsTo(models.Persona, { foreignKey: 'persona_id' }); // Asociación con Persona pertenencia
+    //INFROMACION DE INVENTARIO
+    Usuario.hasMany(models.MovimientoInventario, {foreignKey: 'usuario_id'}); // Asociación con movimientos
+    Usuario.hasMany(models.Bodega, {foreignKey: 'responsable_id'}); // Asociación con Responsable Bodega
+    //INFROMACION DE VENTAS Y COMPRAS
+    Usuario.hasMany(models.Compra, {foreignKey: 'usuario_id'}); // Asociación con Compras
+    Usuario.hasMany(models.Venta, {foreignKey: 'usuario_id'}); // Asociación con Ventas
+    //INFORMACION DE ROLES
+    Usuario.hasMany(models.UsuarioRol, {foreignKey: 'usuario_id'}); // Asociación con rol asignado
+    Usuario.hasMany(models.UsuarioRol, {foreignKey: 'asignado_por'}) // Asociación con rol del asiganador
+}
+
 
 module.exports = Usuario;
