@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const CertificadoDigital = sequelize.define('CertificadoDigital', {
+class CertificadoDigital extends Model {}
+
+CertificadoDigital.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -44,8 +46,14 @@ const CertificadoDigital = sequelize.define('CertificadoDigital', {
         defaultValue: DataTypes.NOW
     }
 }, {
+    sequelize,
+    modelName: 'CertificadoDigital',
     tableName: 'certificados_digitales',
     timestamps: false
 });
+
+CertificadoDigital.associate = (models) => {
+    
+}
 
 module.exports = CertificadoDigital;

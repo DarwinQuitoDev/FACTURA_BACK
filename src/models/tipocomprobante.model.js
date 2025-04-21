@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const TipoComprobante = sequelize.define('TipoComprobante', {
+class TipoComprobante extends Model {}
+
+TipoComprobante.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -23,8 +25,14 @@ const TipoComprobante = sequelize.define('TipoComprobante', {
         defaultValue: true
     }
 }, {
+    sequelize,
+    modelName: 'TipoComprobante',
     tableName: 'tipos_comprobante',
     timestamps: false
 });
+
+TipoComprobante.associate = (models) => {
+    
+}
 
 module.exports = TipoComprobante;

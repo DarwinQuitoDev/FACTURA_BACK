@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Venta = sequelize.define('Venta', {
+class Venta extends Model {}
+
+Venta.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -125,14 +127,14 @@ const Venta = sequelize.define('Venta', {
         type: DataTypes.DATE
     }
 }, {
+    sequelize,
+    modelName: 'Venta',
     tableName: 'ventas',
     timestamps: false,
-    indexes: [
-        {
-            unique: true,
-            fields: ['establecimiento', 'punto_emision_codigo', 'secuencial']
-        }
-    ]
 });
+
+Venta.associate = (models) => {
+    
+}
 
 module.exports = Venta;

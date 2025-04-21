@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const FormaPago = sequelize.define('FormaPago', {
+class FormaPago extends Model {}
+
+FormaPago.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -27,8 +29,14 @@ const FormaPago = sequelize.define('FormaPago', {
         defaultValue: true
     }
 }, {
+    sequelize,
+    modelName: 'FormaPago',
     tableName: 'formas_pago',
     timestamps: false
 });
+
+FormaPago.associate = (models) => {
+    
+}
 
 module.exports = FormaPago;

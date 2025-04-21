@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Establecimiento = sequelize.define('Establecimiento', {
+class Establecimiento extends Model {}
+
+Establecimiento.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -46,14 +48,14 @@ const Establecimiento = sequelize.define('Establecimiento', {
         defaultValue: true
     }
 }, {
+    sequelize,
+    modelName: 'Establecimiento',
     tableName: 'establecimientos',
     timestamps: false,
-    indexes: [
-        {
-            unique: true,
-            fields: ['empresa_id', 'codigo']
-        }
-    ]
 });
+
+Establecimiento.associate = (models) => {
+    
+}
 
 module.exports = Establecimiento;

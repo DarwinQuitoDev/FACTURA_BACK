@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Permiso = sequelize.define('Permiso', {
+class Permiso extends Model {}
+
+Permiso.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -27,8 +29,14 @@ const Permiso = sequelize.define('Permiso', {
         defaultValue: true
     }
 }, {
+    sequelize, 
+    modelName: 'Permiso',
     tableName: 'permisos',
     timestamps: false
 });
+
+Permiso.associate = (models) => {
+    
+}
 
 module.exports = Permiso;

@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const RolPermiso = sequelize.define('RolPermiso', {
+class RolPermiso extends Model {}
+
+RolPermiso.init({
     rol_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -19,8 +21,14 @@ const RolPermiso = sequelize.define('RolPermiso', {
         }
     }
 }, {
+    sequelize,
+    modelName: 'RolPermiso',
     tableName: 'roles_permisos',
     timestamps: false
 });
+
+RolPermiso.associate = (models) => {
+    
+}
 
 module.exports = RolPermiso;

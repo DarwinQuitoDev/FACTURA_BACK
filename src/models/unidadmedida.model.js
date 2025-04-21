@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const UnidadMedida = sequelize.define('UnidadMedida', {
+class UnidadMedida extends Model {}
+
+UnidadMedida.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -24,8 +26,14 @@ const UnidadMedida = sequelize.define('UnidadMedida', {
         defaultValue: true
     }
 }, {
+    sequelize,
+    modelName: 'UnidadMedida',
     tableName: 'unidades_medida',
     timestamps: false
 });
+
+UnidadMedida.associate = (models) => {
+    
+}
 
 module.exports = UnidadMedida;

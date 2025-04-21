@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const PagoVenta = sequelize.define('PagoVenta', {
+class PagoVenta extends Model {}
+
+PagoVenta.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -39,8 +41,14 @@ const PagoVenta = sequelize.define('PagoVenta', {
         type: DataTypes.TEXT
     }
 }, {
+    sequelize,
+    modelName: 'PagoVenta',
     tableName: 'pagos_venta',
     timestamps: false
 });
+
+PagoVenta.associate = (models) => {
+    
+}
 
 module.exports = PagoVenta;

@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const MovimientoInventario = sequelize.define('MovimientoInventario', {
+class MovimientoInventario extends Model {}
+
+MovimientoInventario.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -79,16 +81,14 @@ const MovimientoInventario = sequelize.define('MovimientoInventario', {
         type: DataTypes.TEXT
     }
 }, {
+    sequelize,
+    modelName: 'MovimientoInventario',
     tableName: 'movimientos_inventario',
     timestamps: false,
-    indexes: [
-        {
-            fields: ['documento_tipo', 'documento_id']
-        },
-        {
-            fields: ['producto_id', 'bodega_id']
-        }
-    ]
 });
+
+MovimientoInventario.associate = (models) => {
+    
+}
 
 module.exports = MovimientoInventario;

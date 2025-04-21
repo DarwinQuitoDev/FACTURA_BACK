@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Bodega = sequelize.define('Bodega', {
+class Bodega extends Model{}
+
+Bodega.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -41,8 +43,14 @@ const Bodega = sequelize.define('Bodega', {
         defaultValue: DataTypes.NOW
     }
 }, {
+    sequelize,
+    modelName: 'Bodega',
     tableName: 'bodegas',
     timestamps: false
 });
+
+Bodega.associate = (models) =>{
+    
+}
 
 module.exports = Bodega;

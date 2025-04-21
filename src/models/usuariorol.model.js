@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const UsuarioRol = sequelize.define('UsuarioRol', {
+class UsuarioRol extends Model {}
+
+UsuarioRol.init({
     usuario_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -30,8 +32,14 @@ const UsuarioRol = sequelize.define('UsuarioRol', {
         defaultValue: DataTypes.NOW
     }
 }, {
+    sequelize,
+    modelName: 'UsuarioRol',
     tableName: 'usuarios_roles',
     timestamps: false
 });
+
+UsuarioRol.associate = (models) => {
+    
+}
 
 module.exports = UsuarioRol;

@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const PuntoEmision = sequelize.define('PuntoEmision', {
+class PuntoEmision extends Model {}
+
+PuntoEmision.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -27,14 +29,14 @@ const PuntoEmision = sequelize.define('PuntoEmision', {
         defaultValue: true
     }
 }, {
+    sequelize,
+    modelName: 'PuntoEmision',
     tableName: 'puntos_emision',
     timestamps: false,
-    indexes: [
-        {
-            unique: true,
-            fields: ['codigo']
-        }
-    ]
 });
+
+PuntoEmision.associate = (models) => {
+    
+}
 
 module.exports = PuntoEmision;

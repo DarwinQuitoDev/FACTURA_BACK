@@ -1,7 +1,9 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const CategoriaProducto = sequelize.define('CategoriaProducto', {
+class CategoriaProducto extends Model { }
+
+CategoriaProducto.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -30,19 +32,17 @@ const CategoriaProducto = sequelize.define('CategoriaProducto', {
         defaultValue: true
     }
 }, {
+    sequelize,
+    modelName: 'CategoriaProducto',
     tableName: 'categorias_productos',
     timestamps: false
 });
 
-// Auto-referential relationship
-CategoriaProducto.belongsTo(CategoriaProducto, {
-    foreignKey: 'categoria_padre_id',
-    as: 'categoriaPadre'
-});
+CategoriaProducto.associate = (models) => {
+    CategoriaProducto.belongsTo(models.CategoriaProducto, { foreignKey: 'categoria_padre_id', as: 'categoriaPadre' });
+    CategoriaProducto.hasMany(models.CategoriaProducto, { foreignKey: 'categoria_padre_id', as: 'subcategorias' });
+    CategoriaProducto.hasMany(models.Productos, { foreignKey: 'id', as: 'categoria_id' })
+}
 
-CategoriaProducto.hasMany(CategoriaProducto, {
-    foreignKey: 'categoria_padre_id',
-    as: 'subcategorias'
-});
 
 module.exports = CategoriaProducto;

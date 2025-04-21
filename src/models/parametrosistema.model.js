@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize,DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const ParametroSistema = sequelize.define('ParametroSistema', {
+class ParametroSistema extends Model {}
+
+ParametroSistema.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -27,8 +29,14 @@ const ParametroSistema = sequelize.define('ParametroSistema', {
         onUpdate: DataTypes.NOW
     }
 }, {
+    sequelize,
+    modelName: 'ParametroSistema',
     tableName: 'parametros_sistema',
     timestamps: false
 });
+
+ParametroSistema.associate = (models) => {
+    
+}
 
 module.exports = ParametroSistema;

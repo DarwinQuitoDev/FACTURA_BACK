@@ -1,7 +1,9 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const CodigoICE = sequelize.define('CodigoICE', {
+class CodigoICE extends Model {}
+
+CodigoICE.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -24,8 +26,14 @@ const CodigoICE = sequelize.define('CodigoICE', {
         defaultValue: true
     }
 }, {
+    sequelize,
+    modelName: 'CodigoICE',
     tableName: 'codigos_ice',
     timestamps: false
 });
+
+CodigoICE.associate = (models) => {
+    
+}
 
 module.exports = CodigoICE;

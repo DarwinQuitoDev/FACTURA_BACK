@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-const RetencionCompra = sequelize.define('RetencionCompra', {
+class RetencionCompra extends Model {}
+
+RetencionCompra.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -33,8 +35,14 @@ const RetencionCompra = sequelize.define('RetencionCompra', {
         allowNull: false
     }
 }, {
+    sequelize,
+    modelName: 'RetencionCompra',
     tableName: 'retenciones_compra',
     timestamps: false
 });
+
+RetencionCompra.associate = (models) => {
+    
+}
 
 module.exports = RetencionCompra;
