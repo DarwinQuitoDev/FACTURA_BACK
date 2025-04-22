@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-class CodigoBarras extends Model { }
+class CodigoBarras extends Model {}
 
 CodigoBarras.init({
     id: {
@@ -11,29 +11,25 @@ CodigoBarras.init({
     },
     producto_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'productos',
-            key: 'id'
-        }
+        allowNull: false
     },
     codigo: {
         type: DataTypes.STRING(50),
         allowNull: false
     },
-    activo: {
+    principal: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true
+        defaultValue: false
     }
 }, {
     sequelize,
-    nodelName: 'CodigoBarras',
+    modelName: 'CodigoBarras',
     tableName: 'codigos_barras',
     timestamps: false
 });
 
 CodigoBarras.associate = (models) => {
-    
-}
+    CodigoBarras.belongsTo(models.Producto, { foreignKey: 'producto_id' });
+};
 
-module.exports = CodigoICE;
+module.exports = CodigoBarras;

@@ -19,8 +19,7 @@ RetencionCompra.init({
     },
     codigo_sri: {
         type: DataTypes.STRING(10),
-        allowNull: false,
-        comment: 'Código de retención según SRI'
+        allowNull: false
     },
     porcentaje: {
         type: DataTypes.DECIMAL(5,2),
@@ -42,7 +41,7 @@ RetencionCompra.init({
 });
 
 RetencionCompra.associate = (models) => {
-    
-}
+    RetencionCompra.belongsTo(models.Compra, { foreignKey: 'compra_id' });
+};
 
 module.exports = RetencionCompra;

@@ -6,26 +6,14 @@ class UsuarioRol extends Model {}
 UsuarioRol.init({
     usuario_id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        references: {
-            model: 'usuarios',
-            key: 'id'
-        }
+        primaryKey: true
     },
     rol_id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        references: {
-            model: 'roles',
-            key: 'id'
-        }
+        primaryKey: true
     },
     asignado_por: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'usuarios',
-            key: 'id'
-        }
+        type: DataTypes.INTEGER
     },
     fecha_asignacion: {
         type: DataTypes.DATE,
@@ -39,7 +27,9 @@ UsuarioRol.init({
 });
 
 UsuarioRol.associate = (models) => {
-    
-}
+    UsuarioRol.belongsTo(models.Usuario, { foreignKey: 'usuario_id' });
+    UsuarioRol.belongsTo(models.Rol, { foreignKey: 'rol_id' });
+    UsuarioRol.belongsTo(models.Usuario, { foreignKey: 'asignado_por', as: 'asignadoPor' });
+};
 
 module.exports = UsuarioRol;

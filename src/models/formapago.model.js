@@ -36,7 +36,10 @@ FormaPago.init({
 });
 
 FormaPago.associate = (models) => {
-    
-}
+    FormaPago.hasMany(models.Compra, { foreignKey: 'forma_pago_id' });
+    FormaPago.hasMany(models.Venta, { foreignKey: 'forma_pago_id' });
+    FormaPago.hasMany(models.PagoCompra, { foreignKey: 'forma_pago_id' });
+    FormaPago.hasMany(models.PagoVenta, { foreignKey: 'forma_pago_id' });
+};
 
 module.exports = FormaPago;

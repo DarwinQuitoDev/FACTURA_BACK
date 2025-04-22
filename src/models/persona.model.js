@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-class Persona extends Model{}
+class Persona extends Model {}
 
 Persona.init({
     id: {
@@ -11,11 +11,7 @@ Persona.init({
     },
     tipo_identificacion_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'tipos_identificacion',
-            key: 'id'
-        }
+        allowNull: false
     },
     numero_identificacion: {
         type: DataTypes.STRING(20),
@@ -81,7 +77,10 @@ Persona.init({
 });
 
 Persona.associate = (models) => {
-    
-}
+    Persona.belongsTo(models.TipoIdentificacion, { foreignKey: 'tipo_identificacion_id' });
+    Persona.hasMany(models.Usuario, { foreignKey: 'persona_id' });
+    Persona.hasMany(models.Bodega, { foreignKey: 'responsable_id' });
+    Persona.hasOne(models.Proveedor, { foreignKey: 'persona_id' });
+};
 
 module.exports = Persona;

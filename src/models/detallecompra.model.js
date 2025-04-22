@@ -11,19 +11,11 @@ DetalleCompra.init({
     },
     compra_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'compras',
-            key: 'id'
-        }
+        allowNull: false
     },
     producto_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'productos',
-            key: 'id'
-        }
+        allowNull: false
     },
     cantidad: {
         type: DataTypes.DECIMAL(12,4),
@@ -73,7 +65,8 @@ DetalleCompra.init({
 });
 
 DetalleCompra.associate = (models) => {
-    
-}
+    DetalleCompra.belongsTo(models.Compra, { foreignKey: 'compra_id' });
+    DetalleCompra.belongsTo(models.Producto, { foreignKey: 'producto_id' });
+};
 
 module.exports = DetalleCompra;

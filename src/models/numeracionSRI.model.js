@@ -11,19 +11,11 @@ NumeracionSRI.init({
     },
     establecimiento_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'establecimientos',
-            key: 'id'
-        }
+        allowNull: false
     },
     tipo_comprobante_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'tipos_comprobante',
-            key: 'id'
-        }
+        allowNull: false
     },
     numero_autorizacion: {
         type: DataTypes.STRING(49),
@@ -42,11 +34,11 @@ NumeracionSRI.init({
         allowNull: false
     },
     fecha_emision: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false
     },
     fecha_caducidad: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false
     },
     activo: {
@@ -61,7 +53,8 @@ NumeracionSRI.init({
 });
 
 NumeracionSRI.associate = (models) => {
-    
-}
+    NumeracionSRI.belongsTo(models.Establecimiento, { foreignKey: 'establecimiento_id' });
+    NumeracionSRI.belongsTo(models.TipoComprobante, { foreignKey: 'tipo_comprobante_id' });
+};
 
 module.exports = NumeracionSRI;

@@ -11,16 +11,11 @@ Establecimiento.init({
     },
     empresa_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'empresas',
-            key: 'id'
-        }
+        allowNull: false
     },
     codigo: {
         type: DataTypes.STRING(3),
-        allowNull: false,
-        comment: 'Código del establecimiento (ej: 001)'
+        allowNull: false
     },
     nombre: {
         type: DataTypes.STRING(100),
@@ -34,10 +29,7 @@ Establecimiento.init({
         type: DataTypes.STRING(20)
     },
     email: {
-        type: DataTypes.STRING(100),
-        validate: {
-            isEmail: true
-        }
+        type: DataTypes.STRING(100)
     },
     es_matriz: {
         type: DataTypes.BOOLEAN,
@@ -51,11 +43,12 @@ Establecimiento.init({
     sequelize,
     modelName: 'Establecimiento',
     tableName: 'establecimientos',
-    timestamps: false,
+    timestamps: false
 });
 
 Establecimiento.associate = (models) => {
-    
-}
+    Establecimiento.belongsTo(models.Empresa, { foreignKey: 'empresa_id' });
+    Establecimiento.hasMany(models.NumeracionSRI, { foreignKey: 'establecimiento_id' });
+};
 
 module.exports = Establecimiento;

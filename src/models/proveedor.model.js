@@ -31,8 +31,7 @@ Proveedor.init({
     },
     plazo_pago: {
         type: DataTypes.INTEGER,
-        defaultValue: 30,
-        comment: 'Días de plazo para pago'
+        defaultValue: 30
     },
     limite_credito: {
         type: DataTypes.DECIMAL(12,2)
@@ -60,7 +59,7 @@ Proveedor.init({
 });
 
 Proveedor.associate = (models) => {
-    
-}
+    Proveedor.belongsTo(models.Persona, { foreignKey: 'persona_id' });
+};
 
 module.exports = Proveedor;

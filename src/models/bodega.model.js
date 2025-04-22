@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-class Bodega extends Model{}
+class Bodega extends Model {}
 
 Bodega.init({
     id: {
@@ -49,8 +49,10 @@ Bodega.init({
     timestamps: false
 });
 
-Bodega.associate = (models) =>{
-    
-}
+Bodega.associate = (models) => {
+    Bodega.belongsTo(models.Persona, { foreignKey: 'responsable_id' });
+    Bodega.hasMany(models.Compra, { foreignKey: 'bodega_id' });
+    Bodega.hasMany(models.MovimientoInventario, { foreignKey: 'bodega_id' });
+};
 
 module.exports = Bodega;

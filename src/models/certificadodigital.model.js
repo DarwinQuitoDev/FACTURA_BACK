@@ -11,11 +11,7 @@ CertificadoDigital.init({
     },
     empresa_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'empresas',
-            key: 'id'
-        }
+        allowNull: false
     },
     tipo: {
         type: DataTypes.ENUM('FIRMA', 'SSL'),
@@ -30,11 +26,11 @@ CertificadoDigital.init({
         allowNull: false
     },
     fecha_emision: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false
     },
     fecha_expiracion: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false
     },
     activo: {
@@ -53,7 +49,7 @@ CertificadoDigital.init({
 });
 
 CertificadoDigital.associate = (models) => {
-    
-}
+    CertificadoDigital.belongsTo(models.Empresa, { foreignKey: 'empresa_id' });
+};
 
 module.exports = CertificadoDigital;

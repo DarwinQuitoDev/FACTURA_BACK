@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
 class CodigoICE extends Model {}
@@ -33,7 +33,7 @@ CodigoICE.init({
 });
 
 CodigoICE.associate = (models) => {
-    
-}
+    CodigoICE.hasMany(models.Producto, { foreignKey: 'codigo_ice_id' });
+};
 
 module.exports = CodigoICE;

@@ -48,7 +48,7 @@ PrecioProducto.init({
 });
 
 PrecioProducto.associate = (models) => {
-    
-}
+    PrecioProducto.belongsTo(models.Producto, { foreignKey: 'producto_id' });
+};
 
 module.exports = PrecioProducto;

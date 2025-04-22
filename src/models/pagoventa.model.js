@@ -11,24 +11,16 @@ PagoVenta.init({
     },
     venta_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'ventas',
-            key: 'id'
-        }
+        allowNull: false
     },
     forma_pago_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'formas_pago',
-            key: 'id'
-        }
+        allowNull: false
     },
     fecha_pago: {
         type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
+        defaultValue: DataTypes.NOW,
+        allowNull: false
     },
     valor: {
         type: DataTypes.DECIMAL(12,2),
@@ -48,7 +40,8 @@ PagoVenta.init({
 });
 
 PagoVenta.associate = (models) => {
-    
-}
+    PagoVenta.belongsTo(models.Venta, { foreignKey: 'venta_id' });
+    PagoVenta.belongsTo(models.FormaPago, { foreignKey: 'forma_pago_id' });
+};
 
 module.exports = PagoVenta;

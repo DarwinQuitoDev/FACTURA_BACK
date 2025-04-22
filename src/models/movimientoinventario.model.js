@@ -11,19 +11,11 @@ MovimientoInventario.init({
     },
     producto_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'productos',
-            key: 'id'
-        }
+        allowNull: false
     },
     bodega_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'bodegas',
-            key: 'id'
-        }
+        allowNull: false
     },
     saldo_cantidad: {
         type: DataTypes.DECIMAL(12,4),
@@ -38,8 +30,7 @@ MovimientoInventario.init({
         allowNull: false
     },
     documento_id: {
-        type: DataTypes.INTEGER,
-        comment: 'ID del documento origen'
+        type: DataTypes.INTEGER
     },
     tipo_movimiento: {
         type: DataTypes.ENUM('ENTRADA', 'SALIDA'),
@@ -51,8 +42,7 @@ MovimientoInventario.init({
     },
     costo_unitario: {
         type: DataTypes.DECIMAL(12,4),
-        allowNull: false,
-        comment: 'Costo unitario para entradas'
+        allowNull: false
     },
     costo_total: {
         type: DataTypes.DECIMAL(12,4),
@@ -60,11 +50,7 @@ MovimientoInventario.init({
     },
     usuario_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'usuarios',
-            key: 'id'
-        }
+        allowNull: false
     },
     saldo_costo: {
         type: DataTypes.DECIMAL(12,4),
@@ -84,11 +70,13 @@ MovimientoInventario.init({
     sequelize,
     modelName: 'MovimientoInventario',
     tableName: 'movimientos_inventario',
-    timestamps: false,
+    timestamps: false
 });
 
 MovimientoInventario.associate = (models) => {
-    
-}
+    MovimientoInventario.belongsTo(models.Producto, { foreignKey: 'producto_id' });
+    MovimientoInventario.belongsTo(models.Bodega, { foreignKey: 'bodega_id' });
+    MovimientoInventario.belongsTo(models.Usuario, { foreignKey: 'usuario_id' });
+};
 
 module.exports = MovimientoInventario;

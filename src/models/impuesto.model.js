@@ -36,7 +36,7 @@ Impuesto.init({
 });
 
 Impuesto.associate = (models) => {
-    
-}
+    Impuesto.hasMany(models.Producto, { foreignKey: 'impuesto_id' });
+};
 
 module.exports = Impuesto;

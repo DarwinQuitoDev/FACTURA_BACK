@@ -10,11 +10,7 @@ DocumentoElectronico.init({
         autoIncrement: true
     },
     venta_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'ventas',
-            key: 'id'
-        }
+        type: DataTypes.INTEGER
     },
     tipo_documento: {
         type: DataTypes.ENUM('FACTURA', 'NOTA_CREDITO', 'NOTA_DEBITO', 'RETENCION', 'GUIA_REMISION'),
@@ -32,20 +28,19 @@ DocumentoElectronico.init({
     },
     estado: {
         type: DataTypes.ENUM('PENDIENTE', 'AUTORIZADO', 'RECHAZADO', 'EN_PROCESO'),
-        allowNull: false,
         defaultValue: 'PENDIENTE'
     },
     mensaje_respuesta: {
         type: DataTypes.TEXT
     },
     xml_generado: {
-        type: DataTypes.TEXT('LONG')
+        type: DataTypes.TEXT('long')
     },
     xml_autorizado: {
-        type: DataTypes.TEXT('LONG')
+        type: DataTypes.TEXT('long')
     },
     pdf_generado: {
-        type: DataTypes.BLOB('LONG')
+        type: DataTypes.BLOB('long')
     },
     ambiente: {
         type: DataTypes.ENUM('PRUEBAS', 'PRODUCCION'),
@@ -66,7 +61,7 @@ DocumentoElectronico.init({
 });
 
 DocumentoElectronico.associate = (models) => {
-    
-}
+    DocumentoElectronico.belongsTo(models.Venta, { foreignKey: 'venta_id' });
+};
 
 module.exports = DocumentoElectronico;

@@ -29,14 +29,17 @@ Permiso.init({
         defaultValue: true
     }
 }, {
-    sequelize, 
+    sequelize,
     modelName: 'Permiso',
     tableName: 'permisos',
     timestamps: false
 });
 
 Permiso.associate = (models) => {
-    
-}
+    Permiso.belongsToMany(models.Rol, {
+        through: models.RolPermiso,
+        foreignKey: 'permiso_id'
+    });
+};
 
 module.exports = Permiso;

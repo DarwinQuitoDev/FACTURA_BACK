@@ -11,8 +11,7 @@ Empresa.init({
     },
     ruc: {
         type: DataTypes.STRING(13),
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     razon_social: {
         type: DataTypes.STRING(100),
@@ -30,10 +29,7 @@ Empresa.init({
         type: DataTypes.STRING(20)
     },
     email: {
-        type: DataTypes.STRING(100),
-        validate: {
-            isEmail: true
-        }
+        type: DataTypes.STRING(100)
     },
     website: {
         type: DataTypes.STRING(100)
@@ -61,7 +57,7 @@ Empresa.init({
         defaultValue: true
     },
     fecha_inicio_actividades: {
-        type: DataTypes.DATEONLY
+        type: DataTypes.DATE
     },
     fecha_creacion: {
         type: DataTypes.DATE,
@@ -78,7 +74,8 @@ Empresa.init({
 });
 
 Empresa.associate = (models) => {
-    
-}
+    Empresa.hasMany(models.CertificadoDigital, { foreignKey: 'empresa_id' });
+    Empresa.hasMany(models.Establecimiento, { foreignKey: 'empresa_id' });
+};
 
 module.exports = Empresa;

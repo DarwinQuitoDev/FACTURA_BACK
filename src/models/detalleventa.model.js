@@ -11,19 +11,11 @@ DetalleVenta.init({
     },
     venta_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'ventas',
-            key: 'id'
-        }
+        allowNull: false
     },
     producto_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'productos',
-            key: 'id'
-        }
+        allowNull: false
     },
     cantidad: {
         type: DataTypes.DECIMAL(12,4),
@@ -81,7 +73,8 @@ DetalleVenta.init({
 });
 
 DetalleVenta.associate = (models) => {
-    
-}
+    DetalleVenta.belongsTo(models.Venta, { foreignKey: 'venta_id' });
+    DetalleVenta.belongsTo(models.Producto, { foreignKey: 'producto_id' });
+};
 
 module.exports = DetalleVenta;

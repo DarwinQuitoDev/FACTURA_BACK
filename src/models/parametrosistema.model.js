@@ -1,4 +1,4 @@
-const { Sequelize,DataTypes, Model } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
 class ParametroSistema extends Model {}
@@ -25,8 +25,7 @@ ParametroSistema.init({
     },
     fecha_actualizacion: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        onUpdate: DataTypes.NOW
+        defaultValue: DataTypes.NOW
     }
 }, {
     sequelize,
@@ -34,9 +33,5 @@ ParametroSistema.init({
     tableName: 'parametros_sistema',
     timestamps: false
 });
-
-ParametroSistema.associate = (models) => {
-    
-}
 
 module.exports = ParametroSistema;

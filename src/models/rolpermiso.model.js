@@ -6,19 +6,11 @@ class RolPermiso extends Model {}
 RolPermiso.init({
     rol_id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        references: {
-            model: 'roles',
-            key: 'id'
-        }
+        primaryKey: true
     },
     permiso_id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        references: {
-            model: 'permisos',
-            key: 'id'
-        }
+        primaryKey: true
     }
 }, {
     sequelize,
@@ -28,7 +20,8 @@ RolPermiso.init({
 });
 
 RolPermiso.associate = (models) => {
-    
-}
+    RolPermiso.belongsTo(models.Rol, { foreignKey: 'rol_id' });
+    RolPermiso.belongsTo(models.Permiso, { foreignKey: 'permiso_id' });
+};
 
 module.exports = RolPermiso;

@@ -11,30 +11,22 @@ Compra.init({
     },
     proveedor_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'proveedores',
-            key: 'id'
-        }
+        allowNull: false
     },
     numero_factura: {
         type: DataTypes.STRING(50),
         allowNull: false
     },
     fecha_factura: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false
     },
     fecha_recepcion: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false
     },
     forma_pago_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'formas_pago',
-            key: 'id'
-        }
+        type: DataTypes.INTEGER
     },
     subtotal_sin_impuestos: {
         type: DataTypes.DECIMAL(12,2),
@@ -78,22 +70,14 @@ Compra.init({
     },
     bodega_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'bodegas',
-            key: 'id'
-        }
+        allowNull: false
     },
     observaciones: {
         type: DataTypes.TEXT
     },
     usuario_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'usuarios',
-            key: 'id'
-        }
+        allowNull: false
     },
     fecha_creacion: {
         type: DataTypes.DATE,
@@ -104,13 +88,19 @@ Compra.init({
     }
 }, {
     sequelize,
-    nodelName: 'Compra',
+    modelName: 'Compra',
     tableName: 'compras',
     timestamps: false
 });
 
 Compra.associate = (models) => {
-    
-}
+    Compra.belongsTo(models.Proveedor, { foreignKey: 'proveedor_id' });
+    Compra.belongsTo(models.FormaPago, { foreignKey: 'forma_pago_id' });
+    Compra.belongsTo(models.Bodega, { foreignKey: 'bodega_id' });
+    Compra.belongsTo(models.Usuario, { foreignKey: 'usuario_id' });
+    Compra.hasMany(models.DetalleCompra, { foreignKey: 'compra_id' });
+    Compra.hasMany(models.PagoCompra, { foreignKey: 'compra_id' });
+    Compra.hasMany(models.RetencionCompra, { foreignKey: 'compra_id' });
+};
 
 module.exports = Compra;

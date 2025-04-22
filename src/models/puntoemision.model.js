@@ -11,8 +11,7 @@ PuntoEmision.init({
     },
     codigo: {
         type: DataTypes.STRING(3),
-        allowNull: false,
-        comment: 'Código del punto de emisión (ej: 001)'
+        allowNull: false
     },
     nombre: {
         type: DataTypes.STRING(100),
@@ -32,11 +31,11 @@ PuntoEmision.init({
     sequelize,
     modelName: 'PuntoEmision',
     tableName: 'puntos_emision',
-    timestamps: false,
+    timestamps: false
 });
 
 PuntoEmision.associate = (models) => {
-    
-}
+    PuntoEmision.hasMany(models.Venta, { foreignKey: 'punto_emision_id' });
+};
 
 module.exports = PuntoEmision;

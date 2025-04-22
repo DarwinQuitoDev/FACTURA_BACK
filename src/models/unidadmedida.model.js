@@ -33,7 +33,7 @@ UnidadMedida.init({
 });
 
 UnidadMedida.associate = (models) => {
-    
-}
+    UnidadMedida.hasMany(models.Producto, { foreignKey: 'unidad_medida_id' });
+};
 
 module.exports = UnidadMedida;

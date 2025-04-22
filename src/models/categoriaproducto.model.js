@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-class CategoriaProducto extends Model { }
+class CategoriaProducto extends Model {}
 
 CategoriaProducto.init({
     id: {
@@ -24,8 +24,7 @@ CategoriaProducto.init({
         }
     },
     codigo_sri: {
-        type: DataTypes.STRING(10),
-        comment: 'Código de categoría para SRI'
+        type: DataTypes.STRING(10)
     },
     activo: {
         type: DataTypes.BOOLEAN,
@@ -39,10 +38,8 @@ CategoriaProducto.init({
 });
 
 CategoriaProducto.associate = (models) => {
-    CategoriaProducto.belongsTo(models.CategoriaProducto, { foreignKey: 'categoria_padre_id', as: 'categoriaPadre' });
-    CategoriaProducto.hasMany(models.CategoriaProducto, { foreignKey: 'categoria_padre_id', as: 'subcategorias' });
-    CategoriaProducto.hasMany(models.Productos, { foreignKey: 'id', as: 'categoria_id' })
-}
-
+    CategoriaProducto.belongsTo(models.CategoriaProducto, { foreignKey: 'categoria_padre_id', as: 'padre' });
+    CategoriaProducto.hasMany(models.Producto, { foreignKey: 'categoria_id' });
+};
 
 module.exports = CategoriaProducto;

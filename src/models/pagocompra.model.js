@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/db');
 
-class PagoCompra extends Model{}
+class PagoCompra extends Model {}
 
 PagoCompra.init({
     id: {
@@ -11,24 +11,16 @@ PagoCompra.init({
     },
     compra_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'compras',
-            key: 'id'
-        }
+        allowNull: false
     },
     forma_pago_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'formas_pago',
-            key: 'id'
-        }
+        allowNull: false
     },
     fecha_pago: {
         type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
+        defaultValue: DataTypes.NOW,
+        allowNull: false
     },
     valor: {
         type: DataTypes.DECIMAL(12,2),
@@ -48,7 +40,8 @@ PagoCompra.init({
 });
 
 PagoCompra.associate = (models) => {
-    
-}
+    PagoCompra.belongsTo(models.Compra, { foreignKey: 'compra_id' });
+    PagoCompra.belongsTo(models.FormaPago, { foreignKey: 'forma_pago_id' });
+};
 
 module.exports = PagoCompra;
