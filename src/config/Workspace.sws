@@ -4,7 +4,7 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{BCE8E475-BB45-4C0E-B1ED-360CD41761EA}" Name="BDD_Facturacion" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="BDD_Facturacion.pdm"/>
+		<Model Expanded="Yes" ID="{BCE8E475-BB45-4C0E-B1ED-360CD41761EA}" Name="BDD_Facturacion" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="/users/darwin/documents/github/factura_back/factura_back/src/config/bdd_facturacion.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
