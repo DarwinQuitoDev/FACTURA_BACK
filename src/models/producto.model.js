@@ -38,6 +38,7 @@ Producto.associate = (models) => {
     Producto.belongsTo(models.CodigoICE, { foreignKey: 'codigo_ice_id' });
     Producto.hasMany(models.PrecioProducto, { foreignKey: 'producto_id' });
     Producto.hasMany(models.CodigoBarras, { foreignKey: 'producto_id' });
+    Producto.hasMany(models.DetalleCompra, { foreignKey: 'producto_id' });
 };
 
 module.exports = Producto;

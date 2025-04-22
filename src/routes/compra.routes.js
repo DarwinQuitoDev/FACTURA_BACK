@@ -4,7 +4,7 @@ const router = express.Router();
 const controller = require('../controllers/Compra.controller');
 
 // Rutas CRUD básicas
-router.post('/', controller.crearCompra); // Crear
+router.post('/', controller.crearDetallecompra); // Crear
 router.get('/', controller.obtenerCompras); // Obtener todos
 router.get('/:id', controller.obtenerCompraPorId); // Obtener por ID
 router.put('/:id', controller.actualizarCompra); // Actualizar
