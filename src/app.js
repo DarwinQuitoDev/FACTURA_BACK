@@ -38,7 +38,6 @@ const tipoIdentificacionRoutes = require('./routes/tipoidentificacion.routes');
 const unidadMedidaRoutes = require('./routes/unidadmedida.routes');
 const usuarioRolRoutes = require('./routes/usuariorol.routes');
 const ventaRoutes = require('./routes/venta.routes');
-const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 
@@ -53,7 +52,6 @@ app.use((req, res, next) => {
 });
 
 // Rutas
-app.use('/api/auth', authRoutes);
 app.use('/api/usuario', usuarioRoutes);
 app.use('/api/compra', compraRoutes);
 app.use('/api/producto', productoRoutes);

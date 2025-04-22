@@ -1,13 +1,13 @@
 // src/routes/bodega.routes.js
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/Bodega.controller');
+const controller = require('../controllers/bodega.controller');
 
 // Rutas CRUD básicas
-router.post('/', controller.crearbodega); // Crear
-router.get('/', controller.obtenerbodegas); // Obtener todos
-router.get('/:id', controller.obtenerbodegaPorId); // Obtener por ID
-router.put('/:id', controller.actualizarbodega); // Actualizar
-router.delete('/:id', controller.eliminarbodega); // Eliminación (lógica si aplica)
+router.post('/', controller.crearBodega); // Crear
+router.get('/', controller.obtenerBodegas); // Obtener todos
+router.get('/:id', controller.obtenerBodegaPorId); // Obtener por ID
+router.put('/:id', controller.actualizarBodega); // Actualizar
+router.delete('/:id', controller.eliminarBodega); // Eliminación (lógica si aplica)
 
 module.exports = router;
