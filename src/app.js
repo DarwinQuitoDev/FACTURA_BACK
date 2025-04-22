@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./config/db'); // Asegúrate de que esta ruta es correcta
 
-// Importación de rutas
+// Importación de rutas de nuevo
 const usuarioRoutes = require('./routes/usuario.routes');
 const compraRoutes = require('./routes/compra.routes');
 const productoRoutes = require('./routes/producto.routes');
