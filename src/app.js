@@ -3,7 +3,11 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./config/db'); // Asegúrate de que esta ruta es correcta
 
+// Middleware
+const authMiddleware = require('./middlewares/auth');
+
 // Importación de rutas de nuevo
+const authRoutes = require('./routes/auth.routes');
 const usuarioRoutes = require('./routes/usuario.routes');
 const compraRoutes = require('./routes/compra.routes');
 const productoRoutes = require('./routes/producto.routes');
@@ -51,41 +55,44 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rutas
-app.use('/api/usuario', usuarioRoutes);
-app.use('/api/compra', compraRoutes);
-app.use('/api/producto', productoRoutes);
-app.use('/api/detallecompra', detalleCompraRoutes);
-app.use('/api/bodega', bodegaRoutes);
-app.use('/api/categoriaproducto', categoriaProductoRoutes);
-app.use('/api/certificadodigital', certificadoDigitalRoutes);
-app.use('/api/codigobarras', codigoBarrasRoutes);
-app.use('/api/codigoice', codigoICERoutes);
-app.use('/api/detalleventa', detalleVentaRoutes);
-app.use('/api/documentoelectronico', documentoElectronicoRoutes);
-app.use('/api/empresa', empresaRoutes);
-app.use('/api/establecimiento', establecimientoRoutes);
-app.use('/api/formapago', formapagoRoutes);
-app.use('/api/impuesto', impuestoRoutes);
-app.use('/api/movimientoinventario', movimientoInventarioRoutes);
-app.use('/api/numeracionsri', numeracionSRIRoutes);
-app.use('/api/pagocompra', pagoCompraRoutes);
-app.use('/api/pagoventa', pagoVentaRoutes);
-app.use('/api/parametrosistema', parametroSistemaRoutes);
-app.use('/api/permiso', permisoRoutes);
-app.use('/api/persona', personaRoutes);
-app.use('/api/precioproducto', precioProductoRoutes);
-app.use('/api/proveedor', proveedorRoutes);
-app.use('/api/puntoemision', puntoEmisionRoutes);
-app.use('/api/retencioncompra', retencionCompraRoutes);
-app.use('/api/retencionventa', retencionVentaRoutes);
-app.use('/api/rol', rolRoutes);
-app.use('/api/rolpermiso', rolPermisoRoutes);
-app.use('/api/tipocomprobante', tipoComprobanteRoutes);
-app.use('/api/tipoidentificacion', tipoIdentificacionRoutes);
-app.use('/api/unidadmedida', unidadMedidaRoutes);
-app.use('/api/usuariorol', usuarioRolRoutes);
-app.use('/api/venta', ventaRoutes);
+// Rutas públicas
+app.use('/api/auth', authRoutes);
+
+// Rutas protegidas (requieren autenticación)
+app.use('/api/usuario', authMiddleware, usuarioRoutes);
+app.use('/api/compra', authMiddleware, compraRoutes);
+app.use('/api/producto', authMiddleware, productoRoutes);
+app.use('/api/detallecompra', authMiddleware, detalleCompraRoutes);
+app.use('/api/bodega', authMiddleware, bodegaRoutes);
+app.use('/api/categoriaproducto', authMiddleware, categoriaProductoRoutes);
+app.use('/api/certificadodigital', authMiddleware, certificadoDigitalRoutes);
+app.use('/api/codigobarras', authMiddleware, codigoBarrasRoutes);
+app.use('/api/codigoice', authMiddleware, codigoICERoutes);
+app.use('/api/detalleventa', authMiddleware, detalleVentaRoutes);
+app.use('/api/documentoelectronico', authMiddleware, documentoElectronicoRoutes);
+app.use('/api/empresa', authMiddleware, empresaRoutes);
+app.use('/api/establecimiento', authMiddleware, establecimientoRoutes);
+app.use('/api/formapago', authMiddleware, formapagoRoutes);
+app.use('/api/impuesto', authMiddleware, impuestoRoutes);
+app.use('/api/movimientoinventario', authMiddleware, movimientoInventarioRoutes);
+app.use('/api/numeracionsri', authMiddleware, numeracionSRIRoutes);
+app.use('/api/pagocompra', authMiddleware, pagoCompraRoutes);
+app.use('/api/pagoventa', authMiddleware, pagoVentaRoutes);
+app.use('/api/parametrosistema', authMiddleware, parametroSistemaRoutes);
+app.use('/api/permiso', authMiddleware, permisoRoutes);
+app.use('/api/persona', authMiddleware, personaRoutes);
+app.use('/api/precioproducto', authMiddleware, precioProductoRoutes);
+app.use('/api/proveedor', authMiddleware, proveedorRoutes);
+app.use('/api/puntoemision', authMiddleware, puntoEmisionRoutes);
+app.use('/api/retencioncompra', authMiddleware, retencionCompraRoutes);
+app.use('/api/retencionventa', authMiddleware, retencionVentaRoutes);
+app.use('/api/rol', authMiddleware, rolRoutes);
+app.use('/api/rolpermiso', authMiddleware, rolPermisoRoutes);
+app.use('/api/tipocomprobante', authMiddleware, tipoComprobanteRoutes);
+app.use('/api/tipoidentificacion', authMiddleware, tipoIdentificacionRoutes);
+app.use('/api/unidadmedida', authMiddleware, unidadMedidaRoutes);
+app.use('/api/usuariorol', authMiddleware, usuarioRolRoutes);
+app.use('/api/venta', authMiddleware, ventaRoutes);
 
 // Manejador de errores
 app.use((err, req, res, next) => {

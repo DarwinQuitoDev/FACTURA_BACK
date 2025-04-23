@@ -64,18 +64,13 @@ Usuario.init({
 });
 
 Usuario.associate = (models) => {
-    //INFROMACION DEL USUARIO
-    Usuario.belongsTo(models.Persona, { foreignKey: 'persona_id' }); // Asociación con Persona pertenencia
-    //INFROMACION DE INVENTARIO
-    Usuario.hasMany(models.MovimientoInventario, {foreignKey: 'usuario_id'}); // Asociación con movimientos
-    Usuario.hasMany(models.Bodega, {foreignKey: 'responsable_id'}); // Asociación con Responsable Bodega
-    //INFROMACION DE VENTAS Y COMPRAS
-    Usuario.hasMany(models.Compra, {foreignKey: 'usuario_id'}); // Asociación con Compras
-    Usuario.hasMany(models.Venta, {foreignKey: 'usuario_id'}); // Asociación con Ventas
-    //INFORMACION DE ROLES
-    Usuario.hasMany(models.UsuarioRol, {foreignKey: 'usuario_id'}); // Asociación con rol asignado
-    Usuario.hasMany(models.UsuarioRol, {foreignKey: 'asignado_por'}) // Asociación con rol del asiganador
-}
-
+    Usuario.belongsTo(models.Persona, { foreignKey: 'persona_id' });
+    Usuario.hasMany(models.MovimientoInventario, {foreignKey: 'usuario_id'});
+    Usuario.hasMany(models.Bodega, {foreignKey: 'responsable_id'});
+    Usuario.hasMany(models.Compra, {foreignKey: 'usuario_id'});
+    Usuario.hasMany(models.Venta, {foreignKey: 'usuario_id'});
+    Usuario.hasMany(models.UsuarioRol, {foreignKey: 'usuario_id'});
+    Usuario.hasMany(models.UsuarioRol, {foreignKey: 'asignado_por'});
+};
 
 module.exports = Usuario;

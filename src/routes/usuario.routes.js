@@ -1,7 +1,7 @@
 // src/routes/usuarios.routes.js
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/Usuario.controller');
+const controller = require('../controllers/usuario.controller');
 
 // Rutas CRUD básicas
 router.post('/', controller.crearUsuario); // Crear
