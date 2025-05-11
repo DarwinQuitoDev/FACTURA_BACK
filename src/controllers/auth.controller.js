@@ -3,7 +3,7 @@ const Usuario = require('../models/usuario.model');
 
 // Generar tokens
 const generateTokens = (userData) => {
-    const accessToken = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const accessToken = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '8h' });
     const refreshToken = jwt.sign(userData, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' });
     return { accessToken, refreshToken };
 };
