@@ -13,7 +13,7 @@ exports.crearEmpresa = async (req, res) => {
 // Obtener todos
 exports.obtenerEmpresas = async (req, res) => {
   try {
-    const items = await Empresa.findAll({ where: { activo: true } });
+    const items = await Empresa.findAll();
     res.json(items);
   } catch (error) {
     res.status(500).json({ error: error.message });
