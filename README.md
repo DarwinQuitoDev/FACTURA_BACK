@@ -78,3 +78,8 @@ npm run dev
 ## 🧪 Pruebas
 
 Próximamente se integrarán pruebas unitarias con `Jest`
+
+## 🚀 Desarrolladores
+Ing. Darwin Quito
+Ing. Jorge Salgado
+Ing. Marco Inlago
